@@ -1,141 +1,246 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-<meta charset="UTF-8">
-<title>TravelCR</title>
+    <head>
+        <meta charset="UTF-8">
+        <title>TravelCR</title>
 
-<style>
+        <style>
 
-body{
-    margin:0;
-    font-family: Arial;
-    background:#f4f6f8;
-}
+            body{
+                margin:0;
+                font-family: Arial;
+                background:#f4f6f8;
 
-/* NAVBAR */
+                display:flex;
+                flex-direction:column;
+                min-height:100vh;
+            }
 
-.navbar{
-    background:#2c3e50;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:15px 30px;
-}
+            /* NAVBAR */
 
-.logo{
-    color:white;
-    font-size:22px;
-    font-weight:bold;
-}
+            .navbar{
+                background:#2c3e50;
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                padding:15px 30px;
+            }
 
-.menu a{
-    color:white;
-    text-decoration:none;
-    margin-left:20px;
-    padding:8px 15px;
-    border-radius:5px;
-}
+            .logo{
+                color:white;
+                font-size:22px;
+                font-weight:bold;
+            }
 
-.menu a:hover{
-    background:#27ae60;
-}
+            .menu a{
+                color:white;
+                text-decoration:none;
+                margin-left:20px;
+                padding:8px 15px;
+                border-radius:5px;
+            }
 
-/* CONTENEDOR TOURS */
+            .menu a:hover{
+                background:#27ae60;
+            }
 
-.contenedor-tours{
-    width:90%;
-    margin:auto;
-    margin-top:40px;
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-    gap:25px;
-}
+            /* CONTENEDOR TOURS */
 
-/* TARJETAS */
+            .contenedor-tours{
+                width:90%;
+                margin:auto;
+                margin-top:40px;
+                display:grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+                gap:25px;
+            }
 
-.card{
-    background:white;
-    border-radius:10px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
-    overflow:hidden;
-    transition: transform 0.2s;
-}
+            /* TARJETAS */
 
-.card:hover{
-    transform:scale(1.03);
-}
+            .card{
+                background:white;
+                border-radius:10px;
+                box-shadow:0 4px 10px rgba(0,0,0,0.1);
+                overflow:hidden;
+                transition: transform 0.2s;
+            }
 
-.card img{
-    width:100%;
-    height:180px;
-    object-fit:cover;
-}
+            .card:hover{
+                transform:scale(1.03);
+            }
 
-.card-body{
-    padding:15px;
-}
+            .card img{
+                width:100%;
+                height:180px;
+                object-fit:cover;
+            }
 
-.card-body h3{
-    margin:0;
-    color:#2c3e50;
-}
+            .card-body{
+                padding:15px;
+            }
 
-.card-body p{
-    color:#555;
-    font-size:14px;
-}
+            .card-body h3{
+                margin:0;
+                color:#2c3e50;
+            }
 
-.card a{
-    text-decoration:none;
-    color:inherit;
-}
+            .card-body p{
+                color:#555;
+                font-size:14px;
+            }
 
-</style>
-</head>
+            .card a{
+                text-decoration:none;
+                color:inherit;
+            }
 
-<body>
+            .idioma-select{
+                margin-left:20px;
+                padding:6px 10px;
+                border-radius:5px;
+                border:none;
+                background:#2c3e50;   /* mismo color del navbar */
+                color:white;          /* texto blanco */
+                cursor:pointer;
+            }
 
-<!-- MENU SUPERIOR -->
+            .idioma-select:hover{
+                background:#27ae60;   /* mismo efecto hover que el menú */
+            }
 
-<div class="navbar">
+            .idioma-select:focus{
+                outline:none;
+            }
 
-<div class="logo">
-TravelCR
-</div>
+            .footer{
+                background:#2c3e50;
+                color:white;
+                text-align:center;
+                padding:20px;
+            }
 
-<div class="menu">
-<a th:href="@{/}">Inicio</a>
-<a th:href="@{/tours}">Tours</a>
-<a th:href="@{/reservas}">Reservas</a>
-<a th:href="@{/login}">Inicio de sesión</a>
-</div>
+            .footer a{
+                color:#27ae60;
+                text-decoration:none;
+                font-weight:bold;
+            }
 
-</div>
+            .footer a:hover{
+                text-decoration:underline;
+            }
 
-<!-- TARJETAS DE TOURS -->
+            .boletin{
+                text-align:center;
+                margin:40px 0;
+            }
 
-<div class="contenedor-tours">
+            .boletin h2{
+                color:#2c3e50;
+            }
 
-<div class="card" th:each="tour : ${tours}">
-<a th:href="@{/tours}">
+            .boton-boletin{
+                background:#27ae60;
+                color:white;
+                padding:12px 25px;
+                border:none;
+                border-radius:6px;
+                font-size:16px;
+                cursor:pointer;
+                text-decoration:none;
+            }
 
-<img src="https://via.placeholder.com/400x200">
+            .boton-boletin:hover{
+                background:#1e8449;
+            }
 
-<div class="card-body">
+        </style>
+    </head>
 
-<h3 th:text="${tour.nombre}">Nombre Tour</h3>
+    <body>
 
-<p th:text="${tour.descripcion}">
-Descripción del tour
-</p>
+        <!-- MENU SUPERIOR -->
 
-</div>
+        <div class="navbar">
 
-</a>
-</div>
+            <div class="logo">
+                TravelCR
+            </div>
 
-</div>
+            <div class="menu">
 
-</body>
+                <a th:href="@{/}">Inicio</a>
+                <a th:href="@{/tours}">Tours</a>
+                <a th:href="@{/reservas}">Reservas</a>
+                <a th:href="@{/login}">Inicio de sesión</a>
+
+                <!-- SELECTOR DE IDIOMA -->
+
+                <select class="idioma-select" onchange="location = this.value;">
+                    <option disabled selected>Idioma</option>
+                    <option th:value="@{/(lang=es)}">Español</option>
+                    <option th:value="@{/(lang=en)}">English</option>
+                    <option th:value="@{/(lang=fr)}">Français</option>
+                    <option th:value="@{/(lang=pt)}">Português</option>
+                </select>
+
+                <select class="idioma-select" onchange="location = this.value;">
+                    <option disabled selected>Moneda</option>
+                    <option th:value="@{/(currency=CRC)}">₡ Colones</option>
+                    <option th:value="@{/(currency=USD)}">$ USD</option>
+                    <option th:value="@{/(currency=EUR)}">€ Euro</option>
+                    <option th:value="@{/(currency=GBP)}">£ Libra</option>
+                </select>
+
+            </div>
+
+        </div>
+
+        <!-- TARJETAS DE TOURS -->
+
+        <div class="contenedor-tours">
+
+            <div class="card" th:each="tour : ${tours}">
+                <a th:href="@{/tours}">
+
+                    <img src="https://via.placeholder.com/400x200">
+
+                    <div class="card-body">
+
+                        <h3 th:text="${tour.nombre}">Nombre Tour</h3>
+
+                        <p th:text="${tour.descripcion}">
+                            Descripción del tour
+                        </p>
+
+                    </div>
+
+                </a>
+            </div>
+
+        </div>
+
+        <div class="boletin">
+
+            <h2>Recibe ofertas exclusivas de viajes</h2>
+
+            <p>Suscríbete a nuestro boletín y entérate primero de promociones y nuevos tours.</p>
+
+            <a class="boton-boletin" th:href="@{/boletin}">
+                Suscribirme al boletín
+            </a>
+
+        </div>
+
+        <footer class="footer">
+
+            <p>© 2026 TravelCR - Todos los derechos reservados</p>
+
+            <p>
+                ¿Necesitas ayuda? 
+                <a th:href="@{/soporte}">Contactar soporte</a>
+            </p>
+
+        </footer>
+    </body>
 </html>
