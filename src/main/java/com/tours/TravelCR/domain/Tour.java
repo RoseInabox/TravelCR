@@ -8,38 +8,37 @@ package com.tours.TravelCR.domain;
  *
  * @author joses
  */
+
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @Entity
-@Table(name="tour")
+@Table(name = "tour")
 public class Tour implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_tour")
+    @Column(name = "id_tour")
     private Long idTour;
 
-    @Column(name="nombre")
+    @Column(name = "nombre")
     private String nombre;
 
-    @Column(name="descripcion")
+    @Column(name = "descripcion")
     private String descripcion;
 
-    @Column(name="precio")
+    @Column(name = "precio")
     private BigDecimal precio;
 
-    @Column(name="fecha")
+    @Column(name = "fecha")
     private LocalDate fecha;
 
     @ManyToOne
-    @JoinColumn(name="id_destino")
+    @JoinColumn(name = "id_destino")
     private Destino destino;
 
     public Tour() {
@@ -92,6 +91,4 @@ public class Tour implements Serializable {
     public void setDestino(Destino destino) {
         this.destino = destino;
     }
-    
-
 }

@@ -9,13 +9,16 @@ package com.tours.TravelCR.service;
  * @author joses
  */
 import com.tours.TravelCR.domain.Tour;
+import java.time.LocalDate;
+import java.util.List;
 
 public interface TourService {
 
-    void guardar(Tour tour);
+    List<Tour> listarTodos();
 
-    Tour buscarPorCorreo(String correo);
+    List<Tour> buscarPorDestino(Long idDestino);
 
-    boolean existeCorreo(String correo);
+    List<Tour> buscarPorFecha(LocalDate fecha);
 
+    List<Tour> buscarPorDestinoYFecha(Long idDestino, LocalDate fecha);
 }

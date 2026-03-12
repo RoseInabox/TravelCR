@@ -8,46 +8,32 @@ package com.tours.TravelCR.controller;
  *
  * @author joses
  */
+
+
 import com.tours.TravelCR.dao.TourDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class InicioController {
 
-    @GetMapping("/")
-    public String inicio() {
-        return "index";
-    }
-    
     @Autowired
-private TourDao tourDao;
-    
+    private TourDao tourDao;
+
     @GetMapping("/")
-    public String inicio(Model model){
-
+    public String inicio(Model model) {
         var tours = tourDao.findAll();
-
         model.addAttribute("tours", tours);
-
         return "index";
     }
-@GetMapping("/login")
-public String login(){
-    return "login";
-}
 
-
-@GetMapping("/buscarTours")
-public String buscarTours(Long idDestino, Model model){
-
-    var tours = tourDao.findByDestino_IdDestino(idDestino);
-
-    model.addAttribute("tours", tours);
-
-    return "tours";
-}
-
+    @GetMapping("/buscarTours")
+    public String buscarTours(@RequestParam(required = false) Long idDestino, Model model) {
+        var tours = (idDestino != null) ? tourDao.findByDestino_IdDestino(idDestino) : tourDao.findAll();
+        model.addAttribute("tours", tours);
+        return "tours";
+    }
 }

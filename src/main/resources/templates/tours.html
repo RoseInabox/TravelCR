@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TravelCR - Tours</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            background:#f8fafc;
+            color:#1e293b;
+        }
+
+        header{
+            background:#0f172a;
+            color:white;
+            padding:18px 40px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        .logo{
+            font-size:24px;
+            font-weight:bold;
+        }
+
+        nav a{
+            color:white;
+            text-decoration:none;
+            margin-left:20px;
+            font-weight:bold;
+        }
+
+        .container{
+            max-width:1200px;
+            margin:35px auto;
+            padding:0 20px;
+        }
+
+        .title{
+            text-align:center;
+            margin-bottom:25px;
+        }
+
+        .search-box{
+            background:white;
+            padding:25px;
+            border-radius:16px;
+            box-shadow:0 8px 20px rgba(0,0,0,.08);
+            margin-bottom:30px;
+        }
+
+        .form-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+            gap:16px;
+            align-items:end;
+        }
+
+        label{
+            display:block;
+            margin-bottom:6px;
+            font-weight:bold;
+        }
+
+        select, input{
+            width:100%;
+            padding:12px;
+            border:1px solid #cbd5e1;
+            border-radius:10px;
+        }
+
+        button{
+            width:100%;
+            padding:12px;
+            border:none;
+            border-radius:10px;
+            background:#2563eb;
+            color:white;
+            font-size:15px;
+            font-weight:bold;
+            cursor:pointer;
+        }
+
+        .results{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+            gap:20px;
+        }
+
+        .card{
+            background:white;
+            border-radius:16px;
+            box-shadow:0 8px 20px rgba(0,0,0,.08);
+            overflow:hidden;
+        }
+
+        .card-body{
+            padding:20px;
+        }
+
+        .card-body h3{
+            margin-bottom:10px;
+            color:#0f172a;
+        }
+
+        .card-body p{
+            margin-bottom:8px;
+            color:#475569;
+            line-height:1.5;
+        }
+
+        .empty{
+            text-align:center;
+            margin-top:20px;
+            color:#64748b;
+            font-weight:bold;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">TravelCR</div>
+    <nav>
+        <a th:href="@{/}">Inicio</a>
+        <a th:href="@{/tours}">Tours</a>
+        <a th:href="@{/login}">Login</a>
+        <a th:href="@{/registro}">Registro</a>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="title">
+        <h1>Buscar tours</h1>
+        <p>Filtra por destino y fecha</p>
+    </div>
+
+    <div class="search-box">
+        <form th:action="@{/tours}" method="get">
+            <div class="form-grid">
+                <div>
+                    <label>Destino</label>
+                    <select name="idDestino">
+                        <option value="">Seleccione</option>
+                        <option th:each="destino : ${destinos}"
+                                th:value="${destino.idDestino}"
+                                th:text="${destino.nombre}">
+                        </option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Fecha</label>
+                    <input type="date" name="fecha">
+                </div>
+
+                <div>
+                    <button type="submit">Buscar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div th:if="${#lists.isEmpty(tours)}" class="empty">
+        No se encontraron tours disponibles.
+    </div>
+
+    <div class="results">
+        <div class="card" th:each="tour : ${tours}">
+            <div class="card-body">
+                <h3 th:text="${tour.nombre}"></h3>
+                <p th:text="${tour.descripcion}"></p>
+                <p><strong>Destino:</strong> <span th:text="${tour.destino.nombre}"></span></p>
+                <p><strong>Fecha:</strong> <span th:text="${tour.fecha}"></span></p>
+                <p><strong>Precio:</strong> ₡<span th:text="${tour.precio}"></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
