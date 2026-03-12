@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>TravelCR</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family: Arial;
+    background:#f4f6f8;
+}
+
+/* NAVBAR */
+
+.navbar{
+    background:#2c3e50;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 30px;
+}
+
+.logo{
+    color:white;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.menu a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+    padding:8px 15px;
+    border-radius:5px;
+}
+
+.menu a:hover{
+    background:#27ae60;
+}
+
+/* CONTENEDOR TOURS */
+
+.contenedor-tours{
+    width:90%;
+    margin:auto;
+    margin-top:40px;
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    gap:25px;
+}
+
+/* TARJETAS */
+
+.card{
+    background:white;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    overflow:hidden;
+    transition: transform 0.2s;
+}
+
+.card:hover{
+    transform:scale(1.03);
+}
+
+.card img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+}
+
+.card-body{
+    padding:15px;
+}
+
+.card-body h3{
+    margin:0;
+    color:#2c3e50;
+}
+
+.card-body p{
+    color:#555;
+    font-size:14px;
+}
+
+.card a{
+    text-decoration:none;
+    color:inherit;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- MENU SUPERIOR -->
+
+<div class="navbar">
+
+<div class="logo">
+TravelCR
+</div>
+
+<div class="menu">
+<a th:href="@{/}">Inicio</a>
+<a th:href="@{/tours}">Tours</a>
+<a th:href="@{/reservas}">Reservas</a>
+<a th:href="@{/login}">Inicio de sesión</a>
+</div>
+
+</div>
+
+<!-- TARJETAS DE TOURS -->
+
+<div class="contenedor-tours">
+
+<div class="card" th:each="tour : ${tours}">
+<a th:href="@{/tours}">
+
+<img src="https://via.placeholder.com/400x200">
+
+<div class="card-body">
+
+<h3 th:text="${tour.nombre}">Nombre Tour</h3>
+
+<p th:text="${tour.descripcion}">
+Descripción del tour
+</p>
+
+</div>
+
+</a>
+</div>
+
+</div>
+
+</body>
+</html>

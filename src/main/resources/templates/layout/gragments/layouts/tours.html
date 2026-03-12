@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Tours</title>
+
+    <style>
+        body{
+            font-family: Arial;
+            background:#f4f6f8;
+            padding:40px;
+        }
+
+        table{
+            width:70%;
+            margin:auto;
+            border-collapse: collapse;
+            background:white;
+        }
+
+        th, td{
+            padding:12px;
+            border-bottom:1px solid #ddd;
+            text-align:left;
+        }
+
+        th{
+            background:#2c3e50;
+            color:white;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2 style="text-align:center;">Tours disponibles</h2>
+
+<table>
+
+    <tr>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Precio</th>
+        <th>Fecha</th>
+    </tr>
+
+    <tr th:each="tour : ${tours}">
+        <td th:text="${tour.nombre}"></td>
+        <td th:text="${tour.descripcion}"></td>
+        <td th:text="${tour.precio}"></td>
+        <td th:text="${tour.fecha}"></td>
+    </tr>
+
+</table>
+
+</body>
+</html>
