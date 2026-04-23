@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title th:text="#{registro.titulo}"></title>
+
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #eef2f7;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                flex-direction: column;
+            }
+
+            form {
+                background: white;
+                padding: 25px;
+                border-radius: 10px;
+                width: 350px;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            }
+
+            h1 {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            div {
+                margin-bottom: 15px;
+            }
+
+            label {
+                display: block;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            input {
+                width: 100%;
+                padding: 8px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+            }
+
+            button {
+                width: 100%;
+                padding: 10px;
+                background-color: #28a745;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            button:hover {
+                background-color: #218838;
+            }
+
+            .error {
+                color: red;
+                text-align: center;
+                margin-top: 10px;
+            }
+
+            a {
+                display: block;
+                text-align: center;
+                margin-top: 10px;
+                text-decoration: none;
+                color: #007BFF;
+            }
+        </style>
+
+    </head>
+
+    <body>
+
+        <header th:replace="fragments/fragmentos :: header"></header>
+
+        <form th:action="@{/registro}" th:object="${usuario}" method="post">
+
+            <h1>[[#{registro.encabezado}]]</h1>
+
+            <div>
+                <label>[[#{registro.nombre}]]</label>
+                <input type="text" th:field="*{nombreCompleto}" required>
+            </div>
+
+            <div>
+                <label>[[#{registro.correo}]]</label>
+                <input type="email" th:field="*{correo}" required>
+            </div>
+
+            <div>
+                <label>[[#{registro.contrasena}]]</label>
+                <input type="password" th:field="*{contrasena}" required>
+            </div>
+
+            <div>
+                <label>[[#{registro.fechaNacimiento}]]</label>
+                <input type="date" th:field="*{fechaNacimiento}">
+            </div>
+
+            <button type="submit">[[#{registro.boton}]]</button>
+
+            <p class="error" th:text="${error}"></p>
+
+            <a th:href="@{/login}">[[#{registro.login}]]</a>
+
+        </form>
+
+        <footer th:replace="fragments/fragmentos :: footer"></footer>
+    </body>
+</html>

@@ -18,4 +18,6 @@ public interface UsuarioService {
 
     boolean existeCorreo(String correo);
 
+    void actualizar(Usuario usuario);
+
 }

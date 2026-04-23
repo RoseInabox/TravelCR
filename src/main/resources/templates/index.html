@@ -1,223 +1,213 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>TravelCR - Inicio</title>
-    <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:Arial, sans-serif;
-        }
+    <head>
+        <meta charset="UTF-8">
+        <title>TravelCR - Inicio</title>
+        <style>
+            *{
+                margin:0;
+                padding:0;
+                box-sizing:border-box;
+                font-family:Arial, sans-serif;
+            }
 
-        body{
-            background:#f5f7fb;
-            color:#1f2937;
-        }
+            body{
+                background:#f5f7fb;
+                color:#1f2937;
+            }
 
-        header{
-            background:#0f172a;
-            color:white;
-            padding:18px 40px;
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-        }
+            header{
+                background:#0f172a;
+                color:white;
+                padding:18px 40px;
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+            }
 
-        .logo{
-            font-size:24px;
-            font-weight:bold;
-        }
+            .logo{
+                font-size:24px;
+                font-weight:bold;
+            }
 
-        nav a{
-            color:white;
-            text-decoration:none;
-            margin-left:20px;
-            font-weight:bold;
-        }
+            nav a{
+                color:white;
+                text-decoration:none;
+                margin-left:20px;
+                font-weight:bold;
+            }
 
-        .hero{
-            background:linear-gradient(rgba(15,23,42,.55), rgba(15,23,42,.55)),
-                       url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80');
-            background-size:cover;
-            background-position:center;
-            min-height:420px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            text-align:center;
-            color:white;
-            padding:30px;
-        }
+            .hero{
+                background:linear-gradient(rgba(15,23,42,.55), rgba(15,23,42,.55)),
+                    url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80');
+                background-size:cover;
+                background-position:center;
+                min-height:420px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                text-align:center;
+                color:white;
+                padding:30px;
+            }
 
-        .hero-content h1{
-            font-size:48px;
-            margin-bottom:15px;
-        }
+            .hero-content h1{
+                font-size:48px;
+                margin-bottom:15px;
+            }
 
-        .hero-content p{
-            font-size:18px;
-            margin-bottom:25px;
-        }
+            .hero-content p{
+                font-size:18px;
+                margin-bottom:25px;
+            }
 
-        .hero-buttons a{
-            display:inline-block;
-            margin:8px;
-            padding:12px 22px;
-            border-radius:10px;
-            text-decoration:none;
-            font-weight:bold;
-        }
+            .hero-buttons a{
+                display:inline-block;
+                margin:8px;
+                padding:12px 22px;
+                border-radius:10px;
+                text-decoration:none;
+                font-weight:bold;
+            }
 
-        .btn-primary{
-            background:#2563eb;
-            color:white;
-        }
+            .btn-primary{
+                background:#2563eb;
+                color:white;
+            }
 
-        .btn-secondary{
-            background:white;
-            color:#0f172a;
-        }
+            .btn-secondary{
+                background:white;
+                color:#0f172a;
+            }
 
-        .section{
-            max-width:1200px;
-            margin:50px auto;
-            padding:0 20px;
-        }
+            .section{
+                max-width:1200px;
+                margin:50px auto;
+                padding:0 20px;
+            }
 
-        .section h2{
-            text-align:center;
-            margin-bottom:30px;
-            font-size:32px;
-        }
+            .section h2{
+                text-align:center;
+                margin-bottom:30px;
+                font-size:32px;
+            }
 
-        .cards{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-            gap:25px;
-        }
+            .cards{
+                display:grid;
+                grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+                gap:25px;
+            }
 
-        .card{
-            background:white;
-            border-radius:16px;
-            overflow:hidden;
-            box-shadow:0 8px 20px rgba(0,0,0,0.08);
-            transition:.2s;
-        }
+            .card{
+                background:white;
+                border-radius:16px;
+                overflow:hidden;
+                box-shadow:0 8px 20px rgba(0,0,0,0.08);
+                transition:.2s;
+            }
 
-        .card:hover{
-            transform:translateY(-5px);
-        }
+            .card:hover{
+                transform:translateY(-5px);
+            }
 
-        .card img{
-            width:100%;
-            height:200px;
-            object-fit:cover;
-        }
+            .card img{
+                width:100%;
+                height:200px;
+                object-fit:cover;
+            }
 
-        .card-body{
-            padding:18px;
-        }
+            .card-body{
+                padding:18px;
+            }
 
-        .card-body h3{
-            margin-bottom:10px;
-            color:#0f172a;
-        }
+            .card-body h3{
+                margin-bottom:10px;
+                color:#0f172a;
+            }
 
-        .card-body p{
-            color:#475569;
-            margin-bottom:14px;
-            line-height:1.5;
-        }
+            .card-body p{
+                color:#475569;
+                margin-bottom:14px;
+                line-height:1.5;
+            }
 
-        .card-body a{
-            display:inline-block;
-            background:#2563eb;
-            color:white;
-            text-decoration:none;
-            padding:10px 16px;
-            border-radius:10px;
-            font-weight:bold;
-        }
+            .card-body a{
+                display:inline-block;
+                background:#2563eb;
+                color:white;
+                text-decoration:none;
+                padding:10px 16px;
+                border-radius:10px;
+                font-weight:bold;
+            }
 
-        footer{
-            margin-top:50px;
-            background:#0f172a;
-            color:white;
-            text-align:center;
-            padding:20px;
-        }
-    </style>
-</head>
-<body>
+            footer{
+                margin-top:50px;
+                background:#0f172a;
+                color:white;
+                text-align:center;
+                padding:20px;
+            }
+        </style>
+    </head>
+    <body>
 
-<header>
-    <div class="logo">TravelCR</div>
-    <nav>
-        <a th:href="@{/}">Inicio</a>
-        <a th:href="@{/tours}">Tours</a>
-        <a th:href="@{/login}">Login</a>
-        <a th:href="@{/registro}">Registro</a>
-    </nav>
-</header>
+        <header th:replace="fragments/fragmentos :: header"></header>
 
-<section class="hero">
-    <div class="hero-content">
-        <h1>Explora el mundo con nosotros</h1>
-        <p>Descubre destinos increibles, consulta tours y planea tu proximo viaje.</p>
-        <div class="hero-buttons">
-            <a th:href="@{/tours}" class="btn-primary">Ver Tours</a>
-            <a th:href="@{/registro}" class="btn-secondary">Crear Cuenta</a>
-        </div>
-    </div>
-</section>
-
-<section class="section">
-    <h2>Destinos destacados</h2>
-
-    <div class="cards">
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80" alt="Playa Uvita">
-            <div class="card-body">
-                <h3>Playa Uvita</h3>
-                <p>Playas, naturaleza, mar y experiencias ecoturisticas para disfrutar Costa Rica.</p>
-                <a th:href="@{/tours}">Ver info</a>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Explora el mundo con nosotros</h1>
+                <p>Descubre destinos increibles, consulta tours y planea tu proximo viaje.</p>
+                <div class="hero-buttons">
+                    <a th:href="@{/tours}" class="btn-primary">Ver Tours</a>
+                    <a th:href="@{/registro}" class="btn-secondary">Crear Cuenta</a>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80" alt="Monteverde">
-            <div class="card-body">
-                <h3>Monteverde</h3>
-                <p>Bosque nuboso, biodiversidad y aventura en uno de los sitios mas emblematicos.</p>
-                <a th:href="@{/tours}">Ver info</a>
+        <section class="section">
+            <h2>Destinos destacados</h2>
+
+            <div class="cards">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80" alt="Playa Uvita">
+                    <div class="card-body">
+                        <h3>Playa Uvita</h3>
+                        <p>Playas, naturaleza, mar y experiencias ecoturisticas para disfrutar Costa Rica.</p>
+                        <a th:href="@{/tours}">Ver info</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80" alt="Monteverde">
+                    <div class="card-body">
+                        <h3>Monteverde</h3>
+                        <p>Bosque nuboso, biodiversidad y aventura en uno de los sitios mas emblematicos.</p>
+                        <a th:href="@{/tours}">Ver info</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=80" alt="Puerto Viejo">
+                    <div class="card-body">
+                        <h3>Puerto Viejo</h3>
+                        <p>Caribe, cultura, gastronomia y playas perfectas para desconectarse.</p>
+                        <a th:href="@{/tours}">Ver info</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?auto=format&fit=crop&w=1200&q=80" alt="San Lucas">
+                    <div class="card-body">
+                        <h3>San Lucas</h3>
+                        <p>Historia, senderos y paisajes costeros en una experiencia diferente.</p>
+                        <a th:href="@{/tours}">Ver info</a>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=80" alt="Puerto Viejo">
-            <div class="card-body">
-                <h3>Puerto Viejo</h3>
-                <p>Caribe, cultura, gastronomia y playas perfectas para desconectarse.</p>
-                <a th:href="@{/tours}">Ver info</a>
-            </div>
-        </div>
+        <footer th:replace="fragments/fragmentos :: footer"></footer>
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?auto=format&fit=crop&w=1200&q=80" alt="San Lucas">
-            <div class="card-body">
-                <h3>San Lucas</h3>
-                <p>Historia, senderos y paisajes costeros en una experiencia diferente.</p>
-                <a th:href="@{/tours}">Ver info</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<footer>
-    <p>TravelCR - Proyecto de tours</p>
-</footer>
-
-</body>
+    </body>
 </html>

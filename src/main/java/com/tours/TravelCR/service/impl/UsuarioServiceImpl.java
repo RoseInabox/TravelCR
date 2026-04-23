@@ -8,7 +8,6 @@ package com.tours.TravelCR.service.impl;
  *
  * @author joses
  */
-
 import com.tours.TravelCR.dao.RolDao;
 import com.tours.TravelCR.dao.UsuarioDao;
 import com.tours.TravelCR.domain.Rol;
@@ -47,6 +46,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         usuarioDao.save(usuario);
 
+    }
+
+    @Override
+    public void actualizar(Usuario usuario) {
+        usuarioDao.save(usuario);
     }
 
     @Override

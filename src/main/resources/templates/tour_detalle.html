@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Detalle del Tour</title>
+
+        <style>
+            body {
+                font-family: Arial;
+                background: #f4f6f9;
+            }
+
+            .container {
+                max-width: 700px;
+                margin: 40px auto;
+                background: white;
+                padding: 30px;
+                border-radius: 12px;
+                box-shadow: 0 5px 15px rgba(0,0,0,.1);
+            }
+
+            h1 {
+                margin-bottom: 15px;
+            }
+
+            p {
+                margin-bottom: 10px;
+            }
+
+            button {
+                margin-top: 15px;
+                padding: 10px;
+                border: none;
+                background: #2563eb;
+                color: white;
+                border-radius: 6px;
+                cursor: pointer;
+            }
+        </style>
+
+    </head>
+
+    <body>
+
+        <header th:replace="fragments/fragmentos :: header"></header>
+
+        <div class="container">
+
+            <h1 th:text="${tour.nombre}"></h1>
+
+            <p><strong>Descripción:</strong> 
+                <span th:text="${tour.descripcion}"></span>
+            </p>
+
+            <p><strong>Destino:</strong> 
+                <span th:text="${tour.destino.nombre}"></span>
+            </p>
+
+            <p><strong>Fecha:</strong> 
+                <span th:text="${tour.fecha}"></span>
+            </p>
+
+            <p><strong>Precio:</strong> 
+                ₡<span th:text="${tour.precio}"></span>
+            </p>
+
+            <form th:action="@{/reservar}" method="post">
+                <input type="hidden" name="idTour" th:value="${tour.idTour}">
+
+                <label>Cantidad de personas</label>
+                <input type="number" name="cantidad" min="1" required>
+
+                <button type="submit">Reservar</button>
+            </form>
+
+            <a th:href="@{/tours}">
+                <button>Volver</button>
+            </a>
+
+        </div>
+        <footer th:replace="fragments/fragmentos :: footer"></footer>
+    </body>
+</html>

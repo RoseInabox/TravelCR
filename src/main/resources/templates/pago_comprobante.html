@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Subir Comprobante</title>
+
+    <style>
+        body{
+            font-family:Arial;
+            background:#f5f7fb;
+            margin:0;
+        }
+
+        .container{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            min-height:80vh;
+        }
+
+        .card{
+            background:white;
+            padding:30px;
+            border-radius:12px;
+            width:400px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        h2{
+            text-align:center;
+            margin-bottom:20px;
+        }
+
+        p{
+            margin-bottom:15px;
+        }
+
+        input[type="file"]{
+            margin-bottom:15px;
+        }
+
+        button{
+            width:100%;
+            padding:12px;
+            background:#2563eb;
+            color:white;
+            border:none;
+            border-radius:8px;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#1e40af;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header th:replace="fragments/fragmentos :: header"></header>
+
+    <div class="container">
+
+        <div class="card">
+
+            <h2>Subir comprobante</h2>
+
+            <p><strong>Tour:</strong> [[${reserva.tour.nombre}]]</p>
+
+            <form th:action="@{/pago/guardar}" method="post" enctype="multipart/form-data">
+
+                <input type="hidden" name="idReserva" th:value="${reserva.idReserva}">
+
+                <input type="file" name="archivo" required>
+
+                <button type="submit">Enviar comprobante</button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer th:replace="fragments/fragmentos :: footer"></footer>
+
+</body>
+</html>

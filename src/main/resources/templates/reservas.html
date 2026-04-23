@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Mis Reservas</title>
+
+        <style>
+            body{
+                font-family:Arial;
+                background:#f5f7fb;
+                margin:0;
+            }
+
+            .container{
+                max-width:1100px;
+                margin:40px auto;
+                padding:20px;
+            }
+
+            h1{
+                text-align:center;
+                margin-bottom:25px;
+            }
+
+            table{
+                width:100%;
+                border-collapse:collapse;
+                background:white;
+                border-radius:10px;
+                overflow:hidden;
+                box-shadow:0 5px 15px rgba(0,0,0,0.1);
+            }
+
+            th, td{
+                padding:12px;
+                text-align:center;
+            }
+
+            th{
+                background:#0f172a;
+                color:white;
+            }
+
+            tr:nth-child(even){
+                background:#f1f5f9;
+            }
+
+            .badge{
+                padding:6px 10px;
+                border-radius:8px;
+                font-size:12px;
+                font-weight:bold;
+            }
+
+            .pendiente{
+                background:#facc15;
+            }
+            .aprobado{
+                background:#22c55e;
+                color:white;
+            }
+            .rechazado{
+                background:#ef4444;
+                color:white;
+            }
+
+            .btn{
+                padding:6px 12px;
+                border-radius:6px;
+                text-decoration:none;
+                font-weight:bold;
+            }
+
+            .btn-ver{
+                background:#16a34a;
+                color:white;
+            }
+
+            .mensaje{
+                margin-bottom:20px;
+                padding:15px;
+                border-radius:10px;
+                text-align:center;
+                font-weight:bold;
+            }
+
+            .mensaje-ok{
+                background:#dcfce7;
+                color:#166534;
+            }
+            .mensaje-error{
+                background:#fee2e2;
+                color:#991b1b;
+            }
+            .mensaje-info{
+                background:#e0f2fe;
+                color:#075985;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <header th:replace="~{fragments/fragmentos :: header}"></header>
+
+        <div class="container">
+
+            <h1>Mis Reservas</h1>
+
+            <!-- MENSAJE GLOBAL -->
+            <div th:if="${mensaje}" class="mensaje"
+                 th:classappend="${tipoMensaje == 'ok'} ? 'mensaje-ok' :
+                 (${tipoMensaje == 'error'} ? 'mensaje-error' : 'mensaje-info')">
+                <span th:text="${mensaje}"></span>
+            </div>
+
+            <table th:if="${reservas != null and !reservas.isEmpty()}">
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tour</th>
+                        <th>Personas</th>
+                        <th>Fecha</th>
+                        <th>Estado Reserva</th>
+                        <th>Estado Pago</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="r : ${reservas}">
+                        <td th:text="${r.idReserva}"></td>
+                        <td th:text="${r.tour.nombre}"></td>
+                        <td th:text="${r.cantidadPersonas}"></td>
+                        <td th:text="${#temporals.format(r.fechaReserva, 'dd/MM/yyyy')}"></td>
+
+                        <!-- ESTADO RESERVA -->
+                        <td>
+                            <span th:text="${r.estado}"
+                                  th:class="'badge ' + 
+                                  (r.estado == 'PENDIENTE' ? 'pendiente' :
+                                  (r.estado == 'APROBADO' ? 'aprobado' : 'rechazado'))">
+                            </span>
+                        </td>
+
+                        <!-- ESTADO PAGO -->
+                        <td>
+                            <span th:if="${r.estado == 'PENDIENTE'}" class="badge pendiente">
+                                Pendiente
+                            </span>
+
+                            <span th:if="${r.estado == 'APROBADO'}" class="badge aprobado">
+                                Aprobado
+                            </span>
+
+                            <span th:if="${r.estado == 'RECHAZADO'}" class="badge rechazado">
+                                Rechazado
+                            </span>
+                        </td>
+
+                        <!-- ACCIONES -->
+                        <td>
+                            <a th:href="@{/reservas/{id}(id=${r.idReserva})}"
+                               class="btn btn-ver">
+                                Ver
+                            </a>
+                            <form th:if="${r.estado == 'PENDIENTE'}"
+                                  th:action="@{/reservas/eliminar/{id}(id=${r.idReserva})}" 
+                                  method="post"
+                                  style="display:inline;"
+                                  onsubmit="return confirm('¿Seguro que deseas cancelar esta reserva?');">
+
+                                <button type="submit" class="btn" style="background:#dc2626; color:white;">
+                                    Cancelar
+                                </button>
+
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+            <div th:if="${reservas == null or reservas.isEmpty()}" class="mensaje mensaje-info">
+                No tienes reservas registradas
+            </div>
+
+        </div>
+
+        <footer th:replace="~{fragments/fragmentos :: footer}"></footer>
+
+    </body>
+</html>

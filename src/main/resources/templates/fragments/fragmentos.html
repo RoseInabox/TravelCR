@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+
+    <header th:fragment="header">
+
+        <style>
+            header{
+                background:#0f172a;
+                color:white;
+                padding:18px 40px;
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+            }
+
+            .logo{
+                font-size:24px;
+                font-weight:bold;
+            }
+
+            nav{
+                display:flex;
+                align-items:center;
+            }
+
+            nav a{
+                color:white;
+                text-decoration:none;
+                margin-left:20px;
+                font-weight:bold;
+            }
+
+            .navbar-nav {
+                list-style: none;
+                display: flex;
+                align-items: center;
+                margin-left:20px;
+            }
+
+            .nav-item {
+                position: relative;
+            }
+
+            .dropdown-menu {
+                position: absolute;
+                background: white;
+                color: black;
+                display: none;
+                min-width: 140px;
+                border-radius: 8px;
+                padding: 8px 0;
+                top: 100%;
+                left: 0;
+                z-index: 1000;
+            }
+
+            .nav-item:hover .dropdown-menu {
+                display: block;
+            }
+
+            .dropdown-item {
+                display: block;
+                padding: 8px 12px;
+                text-decoration: none;
+                color: black;
+            }
+
+            .dropdown-item:hover {
+                background: #f1f5f9;
+            }
+        </style>
+
+        <div class="logo">TravelCR</div>
+
+        <nav>
+            <a th:href="@{/}" th:text="#{nav.inicio}">Inicio</a>
+            <a th:href="@{/tours}" th:text="#{nav.tours}">Tours</a>
+            <a sec:authorize="hasRole('ADMIN')" th:href="@{/admin/tours}">
+                Administrar Tours
+            </a>
+            <a sec:authorize="hasRole('ADMIN')" th:href="@{/admin/destinos}">
+                Administrar Destinos
+            </a>
+
+            <!-- NUEVO: Reservas -->
+            <a sec:authorize="isAuthenticated()" th:href="@{/reservas}">
+                Mis Reservas
+            </a>
+
+            <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post" style="margin-left:20px;">
+                <button type="submit" class="btn">Logout</button>
+            </form>
+
+            <a sec:authorize="isAnonymous()" th:href="@{/login}" th:text="#{nav.login}">Login</a>
+            <a sec:authorize="isAnonymous()" th:href="@{/registro}" th:text="#{nav.registro}">Registro</a>
+            <a sec:authorize="isAuthenticated()" th:href="@{/perfil}">
+                Mi Perfil
+            </a>
+
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="#" th:text="#{plantilla.idioma}">Idioma</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" th:href="@{/(lang=es)}">Español</a></li>
+                        <li><a class="dropdown-item" th:href="@{/(lang=en)}">English</a></li>
+                        <li><a class="dropdown-item" th:href="@{/(lang=fr)}">Français</a></li>
+                        <li><a class="dropdown-item" th:href="@{/(lang=pt)}">Português</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+        </nav>
+
+    </header>
+
+    <footer th:fragment="footer">
+
+        <p>© 2026 TravelCR - Todos los derechos reservados</p>
+
+        <p>
+            ¿Necesitas ayuda? 
+            <a th:href="@{/soporte}">Contactar soporte</a>
+        </p>
+
+    </footer>
+
+</html>

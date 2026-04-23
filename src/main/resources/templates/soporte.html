@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Soporte Técnico - Quejas</title>
+
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #eef2f7;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                margin: 0;
+            }
+
+            .container {
+                background: white;
+                padding: 30px;
+                border-radius: 12px;
+                width: 400px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+
+            h1 {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            label {
+                font-weight: bold;
+                display: block;
+                margin-top: 10px;
+            }
+
+            input, select, textarea {
+                width: 100%;
+                padding: 8px;
+                margin-top: 5px;
+                border-radius: 6px;
+                border: 1px solid #ccc;
+            }
+
+            textarea {
+                resize: none;
+                height: 100px;
+            }
+
+            button {
+                width: 100%;
+                margin-top: 15px;
+                padding: 10px;
+                background-color: #28a745;
+                color: white;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+            }
+
+            button:hover {
+                background-color: #218838;
+            }
+
+            .success {
+                color: green;
+                text-align: center;
+                margin-top: 10px;
+            }
+
+            .error {
+                color: red;
+                text-align: center;
+                margin-top: 10px;
+            }
+
+            a {
+                display: block;
+                text-align: center;
+                margin-top: 15px;
+                text-decoration: none;
+                color: #007BFF;
+            }
+        </style>
+
+    </head>
+
+    <body>
+
+        <div class="container">
+
+            <h1>Soporte Técnico</h1>
+
+            <form th:action="@{/soporte}" method="post">
+
+                <label>Nombre:</label>
+                <input type="text" name="nombre" required>
+
+                <label>Correo:</label>
+                <input type="email" name="correo" required>
+
+                <label>Tipo de problema:</label>
+                <select name="tipo" required>
+                    <option value="">Seleccione...</option>
+                    <option value="software">Software</option>
+                    <option value="hardware">Hardware</option>
+                    <option value="red">Red / Internet</option>
+                    <option value="otro">Otro</option>
+                </select>
+
+                <label>Descripción:</label>
+                <textarea name="descripcion" required></textarea>
+
+                <button type="submit">Enviar queja</button>
+
+                <p class="success" th:if="${exito}">Queja enviada correctamente</p>
+                <p class="error" th:if="${error}">Error al enviar la queja</p>
+
+            </form>
+
+            <a th:href="@{/}">Volver al inicio</a>
+
+        </div>
+    </body>
+</html>
